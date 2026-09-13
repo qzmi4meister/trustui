@@ -2,10 +2,19 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 APP="$(pwd)/build/TrustUI.app"
+if [ -d "$APP" ]; then
+    rm -r "$APP"
+fi
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
-xcrun swiftc -swift-version 5 -O -parse-as-library -target "$(uname -m)-apple-macosx14.0" \
-    Sources/TrustUI.swift Sources/Localization.swift Sources/GuideView.swift -o "$APP/Contents/MacOS/TrustUI"
+for ARCH in arm64 x86_64; do
+    xcrun swiftc -swift-version 5 -O -parse-as-library -target "$ARCH-apple-macosx14.0" \
+        -file-prefix-map "$(pwd)=." \
+        Sources/TrustUI.swift Sources/Localization.swift Sources/GuideView.swift -o "build/TrustUI-$ARCH"
+done
+xcrun lipo -create build/TrustUI-arm64 build/TrustUI-x86_64 -output "$APP/Contents/MacOS/TrustUI"
+xcrun lipo "$APP/Contents/MacOS/TrustUI" -verify_arch arm64 x86_64
 cp Sources/backend.py "$APP/Contents/Resources/backend.py"
+cp LICENSE "$APP/Contents/Resources/LICENSE"
 cp -R Resources/en.lproj Resources/ru.lproj "$APP/Contents/Resources/"
 cat > "$APP/Contents/Info.plist" <<'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>
@@ -25,6 +34,7 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
 </dict></plist>
 PLIST
 codesign --force --sign - "$APP"
+codesign --verify --deep --strict "$APP"
 mkdir -p dist
-ditto -c -k --sequesterRsrc --keepParent "$APP" "dist/TrustUI-0.1.0-$(uname -m).zip"
+ditto -c -k --norsrc --noextattr --keepParent "$APP" "dist/TrustUI-0.1.0-universal.zip"
 echo "Built $APP"

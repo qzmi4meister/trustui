@@ -15,7 +15,7 @@
 
 The session snapshot and logs are in ~/Library/Application Support/TrustUI. Configurations, snapshots and backups contain credentials: do not publish them. Check log contents before sharing.
 
-Before updating the CLI, stop the tunnel and back up the configuration. Update with the official installer, reload settings and start the client. To rebuild and reinstall TrustUI itself, run bash install.sh from the project folder. This build has been tested with CLI 1.0.31; consult the documentation of the version you choose when updating.</string>
+Before updating the CLI, stop the tunnel and back up the configuration. Update with the official installer, reload settings and start the client. To update TrustUI from the public tap, run brew update, then brew upgrade --cask qzmi4meister/tap/trustui. Quit and reopen the app. For a local source build, run bash install.sh from the project folder. This build has been tested with CLI 1.0.31; consult the documentation of the version you choose when updating.</string>
 	<key>guide.backup.title</key>
 	<string>Backups and updates</string>
 	<key>guide.cliLink</key>
@@ -83,7 +83,7 @@ Closing the window or quitting TrustUI leaves the tunnel running. Use the menu b
 	<key>guide.issue.folder.title</key>
 	<string>Choose folder is disabled</string>
 	<key>guide.issue.gatekeeper.body</key>
-	<string>A local TrustUI build is not notarized by Apple. For your own build, use install.sh from this project. For an app from a trusted source, after the first launch attempt open System Settings → Privacy &amp; Security → Open Anyway. See Apple’s instructions below.</string>
+	<string>This TrustUI release is not notarized by Apple. If you trust its source, after the first launch attempt open System Settings → Privacy &amp; Security → Open Anyway. The public Homebrew cask does not change Gatekeeper settings. See Apple’s instructions below.</string>
 	<key>guide.issue.gatekeeper.title</key>
 	<string>macOS cannot verify the app</string>
 	<key>guide.issue.missing.body</key>

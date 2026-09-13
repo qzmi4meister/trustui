@@ -5,7 +5,7 @@ cd "$(dirname "$0")"
 command -v brew >/dev/null || { echo "Homebrew is required: https://brew.sh"; exit 1; }
 bash build.sh
 TAP_DIR="$(pwd)/build/homebrew-trustui"
-ARCHIVE="$(pwd)/dist/TrustUI-0.1.0-$(uname -m).zip"
+ARCHIVE="$(pwd)/dist/TrustUI-0.1.0-universal.zip"
 mkdir -p "$TAP_DIR/Casks"
 /usr/bin/ruby -ruri -rdigest -rpathname - "$ARCHIVE" "$TAP_DIR/Casks/trustui.rb" <<'RUBY'
 archive, output = ARGV

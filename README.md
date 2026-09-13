@@ -17,30 +17,48 @@ TrustUI is an independent project. It requires a separately installed TrustTunne
 ## Requirements
 
 - macOS 14 Sonoma or later.
-- [Homebrew](https://brew.sh) and Xcode Command Line Tools (`xcode-select --install`).
-- Python 3.12, installed automatically by the local Homebrew cask.
+- [Homebrew](https://brew.sh).
+- Python 3.12, installed automatically by the Homebrew cask.
 - The TrustTunnel CLI, a full client configuration, and server credentials.
 
-The app builds for the current Mac's architecture. Local validation has been performed on Apple Silicon with TrustTunnel CLI **1.0.31**. Compatibility with other CLI versions is not yet verified. The DNS editor writes the legacy top-level `dns_upstreams` setting; newer configurations may also define `[endpoint].dns_upstreams`.
+The release is a universal app for Apple Silicon and Intel Macs. Local validation has been performed on Apple Silicon with TrustTunnel CLI **1.0.31**. Compatibility with other CLI versions is not yet verified. The DNS editor writes the legacy top-level `dns_upstreams` setting; newer configurations may also define `[endpoint].dns_upstreams`.
 
 ## Install TrustUI through Homebrew
 
 ```sh
-git clone https://github.com/qzmi4meister/trustui.git
-cd trustui
-bash install.sh
+brew install --cask qzmi4meister/tap/trustui
 open -a TrustUI
 ```
 
-The script builds the app, creates a **local** tap named `trustui/local`, and installs its cask. Running it again rebuilds and reinstalls TrustUI. The archive is in `dist/`; the cask is in `build/homebrew-trustui/Casks/`.
+Homebrew adds the [public tap](https://github.com/qzmi4meister/homebrew-tap), downloads the app from [GitHub Releases](https://github.com/qzmi4meister/trustui/releases), verifies its SHA-256 checksum, and installs it in `/Applications`. No source checkout or Swift compiler is needed. Install the TrustTunnel CLI separately using the steps below.
 
-Keep the checkout and archive in place for later reinstalls: the local cask uses a `file://` URL. There is no hosted Homebrew tap or downloadable release yet. If `trustui/local` already points to another checkout, the installer stops without replacing it.
+You can also add the tap once and use the short cask name:
 
-### Signing and Gatekeeper
+```sh
+brew tap qzmi4meister/tap
+brew install --cask trustui
+```
 
-The build has an ad hoc signature and is **not notarized by Apple**. The installer uses Homebrew's `--no-quarantine` option for this locally built app only; it does not change system-wide Gatekeeper settings. This Homebrew option is deprecated and may need replacing in a future installer update. A notarized release would require Developer ID signing and Apple notarization.
+TrustUI is distributed through this project's tap, not the official Homebrew Cask repository.
 
-If an older local installation reports that Apple cannot verify TrustUI, rebuild and reinstall with `bash install.sh`.
+### Moving from the old local tap
+
+Quit TrustUI, then replace its local cask with the public one:
+
+```sh
+brew uninstall --cask trustui/local/trustui
+brew untap trustui/local
+brew install --cask qzmi4meister/tap/trustui
+open -a TrustUI
+```
+
+Your CLI configuration, app preferences, and session data are preserved. Quitting or uninstalling the UI leaves a running tunnel active.
+
+### First launch and Gatekeeper
+
+This release has an ad hoc signature and is **not notarized by Apple**. If macOS blocks the first launch, and you trust this release, open **System Settings → Privacy & Security → Open Anyway** after attempting to open the app. See [Apple's instructions](https://support.apple.com/en-us/102445).
+
+The public cask does not remove quarantine or change Gatekeeper settings. A release that passes Apple's developer verification requires Developer ID signing and notarization.
 
 ## Set up the TrustTunnel CLI
 
@@ -127,11 +145,11 @@ The UI masks the current session's username and password in the displayed log. R
 
 ## Update or uninstall
 
-Update the source and reinstall from the same checkout:
+Install the latest published version:
 
 ```sh
-git pull --ff-only
-bash install.sh
+brew update
+brew upgrade --cask qzmi4meister/tap/trustui
 ```
 
 Quit and reopen TrustUI to load the updated interface. The TrustTunnel CLI is updated separately.
@@ -139,8 +157,8 @@ Quit and reopen TrustUI to load the updated interface. The TrustTunnel CLI is up
 To uninstall, stop the client in TrustUI first, then run:
 
 ```sh
-brew uninstall --cask trustui/local/trustui
-brew untap trustui/local
+brew uninstall --cask qzmi4meister/tap/trustui
+brew untap qzmi4meister/tap
 ```
 
 Uninstalling the app does not stop a running tunnel or remove CLI configurations, backups, or session data.
@@ -149,12 +167,20 @@ Uninstalling the app does not stop a running tunnel or remove CLI configurations
 
 The app uses SwiftUI and AppKit with a Python standard-library bridge. There is no local web server or third-party UI framework. The UI runs as the current user; start and stop operations request administrator privileges through `osascript`.
 
+Install Xcode Command Line Tools (`xcode-select --install`), then:
+
 ```sh
+git clone https://github.com/qzmi4meister/trustui.git
+cd trustui
 brew install python@3.12
 python3.12 -m unittest discover -s tests -v
 bash build.sh
 open build/TrustUI.app
 ```
+
+The build produces `dist/TrustUI-0.1.0-universal.zip` with both architectures and checks the bundle signature. Intel runtime behavior still needs testing on an Intel Mac.
+
+For local development, `bash install.sh` builds and installs through a separate `trustui/local` tap. Its cask refers to an archive in this checkout, so keep the directory in place. It uses Homebrew's deprecated `--no-quarantine` option only for that local build. Uninstall the public cask before switching to the local one. To update a source build, run `git pull --ff-only` and `bash install.sh` again.
 
 Tests cover configuration preservation, external-edit conflicts, private backups, credential masking, process ownership checks, fake-client lifecycle, and localization. They use temporary files and a fake client, without connecting a VPN or changing system routes.
 
