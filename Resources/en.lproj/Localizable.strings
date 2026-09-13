@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>%@: нужны непустые строки.</key>
+	<string>%@: enter non-empty strings.</string>
+	<key>CLI-клиент</key>
+	<string>CLI client</string>
+	<key>DNS-серверы</key>
+	<string>DNS servers</string>
+	<key>guide.appleLink</key>
+	<string>Open an app: Apple’s instructions</string>
+	<key>guide.backup.body</key>
+	<string>Each save creates a timestamped .bak file beside the configuration. To restore settings, stop the client, copy the desired backup to trusttunnel_client.toml, and click Reload. Original comments remain in the .bak file; the working TOML is reformatted.
+
+The session snapshot and logs are in ~/Library/Application Support/TrustUI. Configurations, snapshots and backups contain credentials: do not publish them. Check log contents before sharing.
+
+Before updating the CLI, stop the tunnel and back up the configuration. Update with the official installer, reload settings and start the client. To rebuild and reinstall TrustUI itself, run bash install.sh from the project folder. This build has been tested with CLI 1.0.31; consult the documentation of the version you choose when updating.</string>
+	<key>guide.backup.title</key>
+	<string>Backups and updates</string>
+	<key>guide.cliLink</key>
+	<string>Official TrustTunnel CLI repository</string>
+	<key>guide.configLink</key>
+	<string>CLI configuration reference</string>
+	<key>guide.configure.body</key>
+	<string>Save the TOML file supplied by your server as ~/trusttunnel/endpoint.toml. Then run the command below: setup_wizard adds client settings and creates trusttunnel_client.toml. These are different files: endpoint.toml describes the server, while the full configuration also includes [endpoint] and [listener.tun] for a system-wide tunnel.</string>
+	<key>guide.configure.existing</key>
+	<string>The command stops if trusttunnel_client.toml already exists, so it cannot overwrite your settings. If you already have a complete working configuration, use it and skip the wizard. Before generating it again, back up the existing file or use a separate folder.</string>
+	<key>guide.configure.manualBody</key>
+	<string>For a new configuration, run the interactive wizard below and follow its prompts. You will need the address and port, TLS hostname, username and password. For a system-wide VPN, choose TUN if the wizard asks for a listener type. Obtain certificate details from the server administrator. After setup, make sure the full configuration is named trusttunnel_client.toml.</string>
+	<key>guide.configure.manualTitle</key>
+	<string>Only have a server address and password?</string>
+	<key>guide.configure.title</key>
+	<string>2. Prepare a full client configuration</string>
+	<key>guide.connect.body</key>
+	<string>Under Application, choose the folder containing trusttunnel_client and trusttunnel_client.toml. The default is ~/trusttunnel. Click Reload. On Connection, check the server hostname, addresses, username and protocol. Additional server TOML files in the same folder appear in the configuration picker; selecting one changes the form and must be saved.
+
+Click Start or Save and start. To change folders while the client is running, click Stop first.</string>
+	<key>guide.connect.permissions</key>
+	<string>macOS asks for administrator privileges to create the network interface and routes. Enter your Mac account password in that system dialog; the VPN server password is stored in the configuration. Cancelling authorization cancels startup. Do not start a second CLI instance through start.sh, screen or sudo at the same time.</string>
+	<key>guide.connect.title</key>
+	<string>3. Connect with TrustUI</string>
+	<key>guide.connection</key>
+	<string>Go to Connection</string>
+	<key>guide.copyHint</key>
+	<string>Copying does not run the command</string>
+	<key>guide.daily.body</key>
+	<string>Save writes the configuration but does not change the running session. Stop and start the client to apply changes. Reload reads the file again and asks before discarding unsaved form edits.
+
+Closing the window or quitting TrustUI leaves the tunnel running. Use the menu bar icon to reopen the window or stop the client. Reopening TrustUI picks up its running session. After restarting your Mac, start the client again.</string>
+	<key>guide.daily.title</key>
+	<string>Saving and background operation</string>
+	<key>guide.dns.body</key>
+	<string>Under Routing → DNS servers, enter a DoH address such as the URL below. Use one server per line, then save and restart the client. Leave the field empty to use the CLI default. This setting applies to DNS queries handled by the VPN; a browser’s own secure DNS settings are configured separately.</string>
+	<key>guide.dns.title</key>
+	<string>DNS over HTTPS</string>
+	<key>guide.dnsLink</key>
+	<string>Cloudflare DoH endpoint and documentation</string>
+	<key>guide.install.body</key>
+	<string>Open Terminal and run the commands below. They download the official client installer, install the CLI and setup_wizard in ~/trusttunnel, and print the version. The installer selects the macOS package. To inspect the script first, open the downloaded install-client.sh before running it.</string>
+	<key>guide.install.existing</key>
+	<string>If the CLI is already installed, skip this step and select its folder under Application. Stop the client before updating the CLI. Commands in this guide use ~/trusttunnel; replace that path if you use another folder.</string>
+	<key>guide.install.title</key>
+	<string>1. Install the TrustTunnel CLI</string>
+	<key>guide.installLink</key>
+	<string>Official client installation instructions</string>
+	<key>guide.intro</key>
+	<string>This guide is available offline. Links open official pages. Copy commands into Terminal to run them; TrustUI does not execute them.</string>
+	<key>guide.issue.auth.body</key>
+	<string>If macOS authorization was cancelled, start again and authorize with your Mac account. If the error comes from the VPN server, check the username, password and validity of your configuration with the administrator. Read Logs for the exact error.</string>
+	<key>guide.issue.auth.title</key>
+	<string>Authentication or access denied</string>
+	<key>guide.issue.config.body</key>
+	<string>Open the TOML file in an external editor and fix the reported line, or restore a backup. Click Reload after external edits. If there is a conflict, TrustUI keeps the external changes and refuses to overwrite them with an outdated form.</string>
+	<key>guide.issue.config.title</key>
+	<string>TOML error or external file changes</string>
+	<key>guide.issue.external.body</key>
+	<string>Stop the previous instance using the method you used to start it, for example Ctrl+C in its Terminal window. TrustUI does not terminate external processes. Then start the client from the app.</string>
+	<key>guide.issue.external.title</key>
+	<string>Client is running outside TrustUI</string>
+	<key>guide.issue.folder.body</key>
+	<string>Stop the client and wait for the operation to finish. Folder selection is disabled while the client runs; other settings are temporarily disabled during startup, shutdown and saving.</string>
+	<key>guide.issue.folder.title</key>
+	<string>Choose folder is disabled</string>
+	<key>guide.issue.gatekeeper.body</key>
+	<string>A local TrustUI build is not notarized by Apple. For your own build, use install.sh from this project. For an app from a trusted source, after the first launch attempt open System Settings → Privacy &amp; Security → Open Anyway. See Apple’s instructions below.</string>
+	<key>guide.issue.gatekeeper.title</key>
+	<string>macOS cannot verify the app</string>
+	<key>guide.issue.missing.body</key>
+	<string>Check the selected folder. It needs an executable trusttunnel_client and a full trusttunnel_client.toml, not just the server file. The commands below check the default folder. Click Reload after correcting the problem.</string>
+	<key>guide.issue.missing.title</key>
+	<string>CLI or configuration not found</string>
+	<key>guide.issue.network.body</key>
+	<string>First check Logs for an established connection, timeouts or DNS errors. Check the server address and port, protocol and routing rules. HTTP/3 uses UDP; if the network blocks it, try HTTP/2 if your server supports it. Save and restart after changes. When VPN connectivity is lost, the kill switch may block traffic until it recovers; click Stop to end the session.</string>
+	<key>guide.issue.network.title</key>
+	<string>Client is running, but sites do not load</string>
+	<key>guide.issue.python.body</key>
+	<string>Run brew install python@3.12 in Terminal, then click Reload. If Homebrew is not installed, get it from brew.sh. A normal TrustUI installation through brew adds Python automatically.</string>
+	<key>guide.issue.python.title</key>
+	<string>Python not found</string>
+	<key>guide.issue.tls.body</key>
+	<string>Check the TLS hostname, your Mac’s date and time, and the server certificate. For a custom certificate, ask the administrator for the correct PEM. Fix the underlying problem instead of disabling certificate verification just to dismiss the error.</string>
+	<key>guide.issue.tls.title</key>
+	<string>Certificate or TLS error</string>
+	<key>guide.missingFiles</key>
+	<string>The selected folder needs an executable trusttunnel_client and a complete trusttunnel_client.toml. Click Reload after setup.</string>
+	<key>guide.notReady</key>
+	<string>Set up the CLI and configuration</string>
+	<key>guide.ready</key>
+	<string>CLI found and configuration loaded</string>
+	<key>guide.releasesLink</key>
+	<string>Download a CLI release manually</string>
+	<key>guide.requirements.body</key>
+	<string>You need macOS 14 or later, the TrustTunnel CLI and access to a running TrustTunnel server: its address, TLS hostname and credentials, or an exported TOML file. Ask your administrator for these details or set up your own server using the link below. TrustUI manages the client; it does not provide a VPN server.
+
+Installing TrustUI through brew also installs Python 3.12 as a dependency. The official TrustTunnel graphical app is not required.</string>
+	<key>guide.requirements.title</key>
+	<string>Before you start</string>
+	<key>guide.routing.body</key>
+	<string>Everything except the list below sends matching VPN traffic through the tunnel and listed destinations directly. Only the list below sends just the listed destinations through the VPN. Enter one entry per line: example.com, *.example.com, an IP address, or a subnet such as 192.168.0.0/16. example.com covers the domain itself and www.example.com; *.example.com covers subdomains, but not example.com itself.
+
+This version uses one list, with no rule priorities or external list subscriptions. The kill switch blocks direct access for traffic that should use the VPN when the server connection is lost.</string>
+	<key>guide.routing.title</key>
+	<string>Routing and exclusions</string>
+	<key>guide.serverLink</key>
+	<string>Set up a TrustTunnel server</string>
+	<key>guide.settings</key>
+	<string>Choose a folder in settings</string>
+	<key>guide.title</key>
+	<string>From installation to connection</string>
+	<key>guide.troubleshooting.title</key>
+	<string>If you cannot connect</string>
+	<key>guide.verify.body</key>
+	<string>Client is running, the PID and the start time confirm that the process is alive. Open Logs and check the messages about connecting to the server and any errors. Then open a site that should use the VPN. If you check your public IP, expect the VPN server’s exit address and account for your routing rules. A running process alone does not confirm that traffic is passing through the tunnel.</string>
+	<key>guide.verify.title</key>
+	<string>4. Check the connection</string>
+	<key>guide.verifyReleaseLink</key>
+	<string>Verify the authenticity of a CLI release</string>
+	<key>Адреса для VPN</key>
+	<string>Destinations to route through VPN</string>
+	<key>Адреса сервера</key>
+	<string>Server addresses</string>
+	<key>Блокировать прямой доступ при потере VPN (kill switch)</key>
+	<string>Block direct access when VPN is lost (kill switch)</string>
+	<key>В конфигурации отсутствует listener.</key>
+	<string>The configuration has no listener section.</string>
+	<key>В этом профиле проверка сертификата отключена.</key>
+	<string>Certificate verification is disabled in this profile.</string>
+	<key>Всё, кроме списка ниже</key>
+	<string>Everything except the list below</string>
+	<key>Выберите HTTP/2 или HTTP/3.</key>
+	<string>Choose HTTP/2 or HTTP/3.</string>
+	<key>Выберите папку с trusttunnel_client и trusttunnel_client.toml</key>
+	<string>Choose the folder containing trusttunnel_client and trusttunnel_client.toml</string>
+	<key>Выберите сервер и запустите клиент.</key>
+	<string>Choose a server and start the client.</string>
+	<key>Выбрать</key>
+	<string>Choose</string>
+	<key>Выбрать папку…</key>
+	<string>Choose folder…</string>
+	<key>Для выбора другой папки сначала остановите клиент.</key>
+	<string>Stop the client before choosing another folder.</string>
+	<key>Для управления туннелем нужны права администратора.</key>
+	<string>Administrator privileges are required to control the tunnel.</string>
+	<key>Домен, *.example.com, IP или CIDR — по одному на строку</key>
+	<string>Domain, *.example.com, IP address or CIDR — one per line</string>
+	<key>Дополнительные параметры</key>
+	<string>Advanced settings</string>
+	<key>Есть несохранённые изменения</key>
+	<string>You have unsaved changes</string>
+	<key>Журнал</key>
+	<string>Logs</string>
+	<key>Журнал скрыт: не удалось прочитать конфигурацию сеанса.</key>
+	<string>Log hidden: the session configuration could not be read.</string>
+	<key>Завершить TrustUI</key>
+	<string>Quit TrustUI</string>
+	<key>Запрос прав администратора отменён.</key>
+	<string>Administrator authorization was cancelled.</string>
+	<key>Запустить</key>
+	<string>Start</string>
+	<key>Запущен</key>
+	<string>Started</string>
+	<key>Здесь появится вывод клиента, запущенного через TrustUI.</key>
+	<string>Output from the client started by TrustUI will appear here.</string>
+	<key>Имя пользователя</key>
+	<string>Username</string>
+	<key>Имя сервера (TLS)</key>
+	<string>Server hostname (TLS)</string>
+	<key>Инструкция</key>
+	<string>Guide</string>
+	<key>Инструкция TrustUI</key>
+	<string>TrustUI Guide</string>
+	<key>Исключения из VPN</key>
+	<string>VPN bypass list</string>
+	<key>Клиент ещё завершает работу. Проверьте журнал и повторите остановку.</key>
+	<string>The client is still shutting down. Check the log and try stopping it again.</string>
+	<key>Клиент завершился при запуске. Причина — в журнале.</key>
+	<string>The client exited during startup. Check the log for details.</string>
+	<key>Клиент запущен</key>
+	<string>Client is running</string>
+	<key>Клиент запущен вне TrustUI</key>
+	<string>Client is running outside TrustUI</string>
+	<key>Клиент не запущен</key>
+	<string>Client is not running</string>
+	<key>Клиент остановлен</key>
+	<string>Client is stopped</string>
+	<key>Клиент остановлен.</key>
+	<string>Client stopped.</string>
+	<key>Клиент продолжает работать после закрытия окна и выхода из TrustUI. Для завершения сеанса используйте «Остановить». После перезагрузки компьютера запустите его заново.</key>
+	<string>The client keeps running after you close the window or quit TrustUI. Use Stop to end the session. Start it again after restarting your Mac.</string>
+	<key>Клиент работает в фоне. Закрытие окна не останавливает его.</key>
+	<string>The client is running in the background. Closing the window does not stop it.</string>
+	<key>Клиент уже запущен. Сначала остановите текущий сеанс.</key>
+	<string>The client is already running. Stop the current session first.</string>
+	<key>Конфигурация</key>
+	<string>Configuration</string>
+	<key>Маршрутизация</key>
+	<string>Routing</string>
+	<key>Направлять через VPN</key>
+	<string>Route through VPN</string>
+	<key>Настройки из trusttunnel_client.toml</key>
+	<string>Settings from trusttunnel_client.toml</string>
+	<key>Настройки сохранены. Резервная копия лежит рядом с TOML-файлом.</key>
+	<string>Settings saved. A backup is stored beside the TOML file.</string>
+	<key>Не найден Python 3.12. Установите его командой brew install python@3.12.</key>
+	<string>Python 3.12 was not found. Install it with brew install python@3.12.</string>
+	<key>Не найден исполняемый файл trusttunnel_client.</key>
+	<string>The trusttunnel_client executable was not found.</string>
+	<key>Не удалось выполнить команду.</key>
+	<string>The command could not be completed.</string>
+	<key>Не удалось определить запущенный процесс.</key>
+	<string>The started process could not be identified.</string>
+	<key>Не удалось прочитать: %@</key>
+	<string>Could not read: %@</string>
+	<key>Неизвестная команда.</key>
+	<string>Unknown command.</string>
+	<key>Неизвестный режим маршрутизации.</key>
+	<string>Unknown routing mode.</string>
+	<key>Неподдерживаемый тип TOML: %@</key>
+	<string>Unsupported TOML type: %@</string>
+	<key>Нет доступа к файлу: %@. Проверьте права доступа к папке CLI.</key>
+	<string>Cannot access file: %@. Check the permissions of the CLI folder.</string>
+	<key>Нужны trusttunnel_client и trusttunnel_client.toml. Файлы серверов *.toml появятся в списке конфигураций.</key>
+	<string>Requires trusttunnel_client and trusttunnel_client.toml. Server files (*.toml) will appear in the configuration list.</string>
+	<key>Обновление каждые 2 секунды</key>
+	<string>Updates every 2 seconds</string>
+	<key>Один host:port или IP:port на строку</key>
+	<string>One hostname:port or IP:port per line</string>
+	<key>Остановите прежний сеанс в терминале, чтобы запустить его здесь.</key>
+	<string>Stop the previous session in Terminal before starting it here.</string>
+	<key>Остановить</key>
+	<string>Stop</string>
+	<key>Остановить клиент</key>
+	<string>Stop client</string>
+	<key>Отбросить изменения</key>
+	<string>Discard changes</string>
+	<key>Отбросить несохранённые изменения?</key>
+	<string>Discard unsaved changes?</string>
+	<key>Откройте инструкцию, чтобы установить и настроить CLI.</key>
+	<string>Open the guide to install and configure the CLI.</string>
+	<key>Открыть TOML во внешнем редакторе</key>
+	<string>Open TOML in an external editor</string>
+	<key>Открыть TrustUI</key>
+	<string>Open TrustUI</string>
+	<key>Отмена</key>
+	<string>Cancel</string>
+	<key>Папка</key>
+	<string>Folder</string>
+	<key>Пароль</key>
+	<string>Password</string>
+	<key>Пароль хранится в существующем TOML, резервных копиях и копии текущего сеанса. TrustUI создаёт свои файлы с доступом только для вашего пользователя. Журнал предыдущего запуска заменяется при следующем запуске.</key>
+	<string>The password is stored in the TOML file, backups and session snapshot. TrustUI creates its files with access limited to your user account. The previous log is replaced on the next start.</string>
+	<key>Перечитать</key>
+	<string>Reload</string>
+	<key>По одному на строку. Оставьте пустым, чтобы сохранить штатное поведение CLI.</key>
+	<string>One per line. Leave empty to use the CLI default behavior.</string>
+	<key>Подключение</key>
+	<string>Connection</string>
+	<key>Поиск в журнале</key>
+	<string>Search logs</string>
+	<key>Понятно</key>
+	<string>OK</string>
+	<key>После внешнего редактирования нажмите «Перечитать». При сохранении из формы неизвестные параметры остаются; комментарии сохраняются в резервной копии .bak рядом с конфигом.</key>
+	<string>After editing externally, click Reload. Saving from the form preserves unknown settings; comments are kept in the .bak file beside the configuration.</string>
+	<key>После изменения настроек остановите и снова запустите клиент.</key>
+	<string>After changing settings, stop and start the client again.</string>
+	<key>Последние 48 КБ · имя пользователя и пароль текущего сеанса скрыты</key>
+	<string>Latest 48 KB · current session username and password are hidden</string>
+	<key>Приложение</key>
+	<string>Application</string>
+	<key>Проверять сертификат сервера</key>
+	<string>Verify server certificate</string>
+	<key>Протокол</key>
+	<string>Protocol</string>
+	<key>Работа в фоне</key>
+	<string>Background operation</string>
+	<key>Режим VPN</key>
+	<string>VPN mode</string>
+	<key>Сервер</key>
+	<string>Server</string>
+	<key>Сервер выбран. Сохраните настройки, чтобы применить выбор.</key>
+	<string>Server selected. Save the settings to apply your selection.</string>
+	<key>Скопировано</key>
+	<string>Copied</string>
+	<key>Скопировать</key>
+	<string>Copy</string>
+	<key>Следить</key>
+	<string>Follow</string>
+	<key>Сохранено. Новые настройки применятся после перезапуска клиента.</key>
+	<string>Saved. The new settings will apply after restarting the client.</string>
+	<key>Сохранить</key>
+	<string>Save</string>
+	<key>Сохранить и запустить</key>
+	<string>Save and start</string>
+	<key>Статус выше показывает работу процесса. Состояние соединения и причины ошибок смотрите в журнале CLI.</key>
+	<string>The status above tracks the process. Check the CLI log for connection status and error details.</string>
+	<key>Статус недоступен</key>
+	<string>Status unavailable</string>
+	<key>Текущая / вручную</key>
+	<string>Current / manual</string>
+	<key>Только список ниже</key>
+	<string>Only the list below</string>
+	<key>Транспорт</key>
+	<string>Transport</string>
+	<key>Укажите имя сервера и хотя бы один адрес.</key>
+	<string>Enter a server hostname and at least one address.</string>
+	<key>Уровень журнала</key>
+	<string>Log level</string>
+	<key>Файл изменён другим приложением. Перечитайте настройки перед сохранением.</key>
+	<string>Another application changed the file. Reload settings before saving.</string>
+	<key>Файл не найден: %@. Откройте инструкцию для настройки CLI.</key>
+	<string>File not found: %@. Open the guide to set up the CLI.</string>
+	<key>Этот процесс не принадлежит сеансу TrustUI.</key>
+	<string>This process does not belong to a TrustUI session.</string>
+	<key>Язык интерфейса</key>
+	<string>Interface language</string>
+	<key>назад</key>
+	<string>ago</string>
+</dict>
+</plist>

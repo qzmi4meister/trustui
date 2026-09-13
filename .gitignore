@@ -1,0 +1,21 @@
+build/
+dist/
+__pycache__/
+.DS_Store
+
+# Local credentials, client profiles, and runtime data.
+.env
+.env.*
+!.env.example
+*.toml
+*.bak
+*.log
+*.pem
+*.key
+run.json
+.trustui.lock
+session.lock
+
+# Generated app bundles and archives.
+*.app/
+*.zip
