@@ -41,19 +41,6 @@ brew install --cask trustui
 
 TrustUI is distributed through this project's tap, not the official Homebrew Cask repository.
 
-### Moving from the old local tap
-
-Quit TrustUI, then replace its local cask with the public one:
-
-```sh
-brew uninstall --cask trustui/local/trustui
-brew untap trustui/local
-brew install --cask qzmi4meister/tap/trustui
-open -a TrustUI
-```
-
-Your CLI configuration, app preferences, and session data are preserved. Quitting or uninstalling the UI leaves a running tunnel active.
-
 ### First launch and Gatekeeper
 
 This release has an ad hoc signature and is **not notarized by Apple**. If macOS blocks the first launch, and you trust this release, open **System Settings → Privacy & Security → Open Anyway** after attempting to open the app. See [Apple's instructions](https://support.apple.com/en-us/102445).
